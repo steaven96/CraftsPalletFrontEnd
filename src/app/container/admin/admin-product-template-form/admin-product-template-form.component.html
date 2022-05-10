@@ -1,0 +1,66 @@
+<div id="admin-product-template-form-container" class="p-5">
+	<h1>Product Template Form</h1>
+	<div class="product-form">
+		<form [formGroup]="templateForm">
+			<div class="row">
+
+
+				<div class="col-lg-4 col-md-4 col-sm-12 col-12">
+					<mat-form-field hintLabel="Max 100 characters" appearance="outline">
+						<mat-label>Template Name</mat-label>
+						<input matInput #input maxlength="100" formControlName="templateName" placeholder="Ex. Nougat">
+						<mat-hint align="end">{{input.value?.length || 0}}/100</mat-hint>
+					</mat-form-field>
+				</div>
+
+
+
+				<div class="col-lg-12 col-md-12 col-sm-12 col-12">
+					<mat-label>Template Description</mat-label>
+					<angular-editor formControlName="templateDescription" [config]="config"></angular-editor>
+				</div>
+
+				<div class="col-lg-12 col-md-12 col-sm-12 col-12 my-4">
+					<button mat-raised-button color="primary" (click)="addVariants()"> + Add Variants</button>
+				</div>
+
+				<div class="col-lg-12 col-md-12 col-sm-12 col-12 my-4 row" formArrayName="templateVariants">
+					<div class="row" *ngFor="let variant of templateVariants.controls; let i = index">
+						<div class="row d-flex justify-content-between" formGroupName={{i}}>
+							<div class="col-lg-5 col-md-5 col-sm-12 col-12">
+								<mat-form-field hintLabel="Max 100 characters" appearance="outline">
+									<mat-label>Variant Name</mat-label>
+									<input matInput #input1 maxlength="100" formControlName="variantName" placeholder="Enter Variant Name">
+									<mat-hint align="end">{{input1.value?.length || 0}}/100</mat-hint>
+								</mat-form-field>
+							</div>
+							<div class="col-lg-5 col-md-5 col-sm-12 col-12">
+								<mat-form-field hintLabel="Max 100 characters" appearance="outline">
+									<mat-label>Variant Display Name</mat-label>
+									<input matInput #input2 maxlength="100" formControlName="variantDisplayName"
+										placeholder="Enter variant display Name">
+									<mat-hint align="end">{{input2.value?.length || 0}}/100</mat-hint>
+								</mat-form-field>
+							</div>
+	
+							<div class="col-lg-2 col-md-2 col-sm-12 col-12">
+								<mat-icon class="delete-btn" (click)="deleteVariant(i)">Delete</mat-icon>
+							</div>
+						</div>
+					
+
+
+					</div>
+				</div>
+
+
+
+
+				<div class="col-lg-12 col-md-12 col-sm-12 col-12">
+					<button mat-raised-button color="primary" (click)="productFormSubmit(templateForm.value)">Submit</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+</div>

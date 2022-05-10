@@ -1,0 +1,11 @@
+<div class="app-container">
+  <div class="navbar-section" *ngIf="currentRoute !== '/login' && currentRoute !== '/admin'">
+    <app-navbar></app-navbar>
+  </div>
+  <div class="body-section">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="footer-section" *ngIf="currentRoute !== '/login' && currentRoute !== '/admin'">
+    <app-footer> </app-footer>
+  </div>
+</div>

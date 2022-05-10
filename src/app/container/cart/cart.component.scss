@@ -1,0 +1,88 @@
+#cart-container {
+    .cart-sec {
+        display        : flex;
+        margin         : 5% 0;
+        justify-content: space-between;
+        flex-wrap      : wrap;
+        box-shadow     : 1px 1px 8px grey;
+        padding        : 25px;
+        border-radius  : 5px;
+
+        .cart-heading {
+            flex-basis   : 100%;
+            border-bottom: 1px solid #b1b1b185;
+            margin-bottom: 15px;
+        }
+
+        .cart-products-sec {
+            flex-basis: 70%;
+            background: white;
+
+            .cart-item {
+                display        : flex;
+                justify-content: space-between;
+                border-bottom  : 1px solid #b1b1b185;
+                padding        : 20px 5px 0px;
+            }
+
+            .cart-total-row {
+                padding-top    : 10px;
+                display        : flex;
+                justify-content: right;
+            }
+
+            .img-sec {
+                flex-basis: 20%;
+
+                img {
+                    width: 100%;
+                }
+            }
+
+            .desc-sec {
+                flex-basis: 60%;
+
+                .prod-name {
+                    font-weight: 700;
+                }
+
+                p {
+                    color: green;
+
+                    span {
+                        color: black;
+                    }
+                }
+
+                .qty-sec {
+                    display    : flex;
+                    align-items: center;
+
+                    .opt-sec {
+                        display: flex;
+                        margin : 0 20px;
+
+                        a {
+                            margin-right: 10px;
+                            cursor      : pointer;
+                        }
+                    }
+                }
+
+            }
+
+            .pricing-sec {
+                flex-basis: 10%;
+                display: flex;
+                justify-content: right;
+            }
+        }
+    }
+
+    .cart-pay-sec {
+        flex-basis: 25%;
+    }
+    .amt {
+        font-weight: 700;
+    }
+}
