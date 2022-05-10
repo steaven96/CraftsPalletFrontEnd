@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1652206482451,
+  "timestamp": 1652207707314,
   "index": "craftsPalletFrontEnd/index.html",
   "assetGroups": [
     {
@@ -23,7 +23,7 @@
         "craftsPalletFrontEnd/common.aa696194cd21e284e189.js",
         "craftsPalletFrontEnd/favicon.ico",
         "craftsPalletFrontEnd/index.html",
-        "craftsPalletFrontEnd/main.2ba111adc1bd1ef2934d.js",
+        "craftsPalletFrontEnd/main.8be990ca81267e6ef215.js",
         "craftsPalletFrontEnd/manifest.webmanifest",
         "craftsPalletFrontEnd/polyfills.ec83d2f186d0a6ec650d.js",
         "craftsPalletFrontEnd/runtime.144f5f6f6db5398a1baf.js",
@@ -720,10 +720,10 @@
     "craftsPalletFrontEnd/hotpFactor_38x38.5fc6675014623503531d.png": "79305f242024ccee8ac969bee44ffec94ebe2569",
     "craftsPalletFrontEnd/hotpFactor_70x70.0e011e4cf3a242e8c215.png": "b9c77c5d5d4c2169e200fbc885583c2e194cfc24",
     "craftsPalletFrontEnd/hotpFactor_ico@2x.e86aee5e65953995401d.png": "ce8b53a7cee8690045acfd49ab826fd8f6b0f71e",
-    "craftsPalletFrontEnd/index.html": "d1434e87af045e5756801eb862239e31be486e51",
+    "craftsPalletFrontEnd/index.html": "b1977a232b7b2ab5ade22d14973f696dead5c1c7",
     "craftsPalletFrontEnd/linkedin_logo.4872c8617481bbfcedb4.png": "bd01bb88bc4eaf0bd84b783b547f89e95fecff34",
     "craftsPalletFrontEnd/loader@1x.d322a7ce99c785c18f38.gif": "ce2bac88d718f974add007d55ef0e9314d0f4b61",
-    "craftsPalletFrontEnd/main.2ba111adc1bd1ef2934d.js": "389d0f44b5c84ce6c49f7be45e87174b86d9e90c",
+    "craftsPalletFrontEnd/main.8be990ca81267e6ef215.js": "5cdec9bf70309c9bfdef25bec176ad91b48704c7",
     "craftsPalletFrontEnd/manifest.webmanifest": "9f8f10c80c52ec796b69b56aabb0107fbcf1a6f3",
     "craftsPalletFrontEnd/microsoft_logo.11adfe285febca02cf22.png": "6105e2c603c0676fba494d7392966a7df5490615",
     "craftsPalletFrontEnd/montserrat-light-webfont.47314ef8b3f718bd6b25.woff": "3449db1ccdfe0aeaf89101cc28ecafaecae9fc89",
