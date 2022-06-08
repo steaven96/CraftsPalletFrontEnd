@@ -5,7 +5,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   // { path: 'CraftsPalletFrontEnd/craftsPalletFrontEnd', redirectTo: 'home', pathMatch: 'full' },
   // { path: 'CraftsPalletFrontEnd', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'CraftsPalletFrontEnd', loadChildren: () => import('./container/home/home.module').then(mod => mod.HomeModule) },
+  { path: 'CraftsPalletFrontEnd/', loadChildren: () => import('./container/home/home.module').then(mod => mod.HomeModule) },
   { path: 'home', loadChildren: () => import('./container/home/home.module').then(mod => mod.HomeModule) },
   { path: 'admin', loadChildren: () => import('./container/admin/admin.module').then(mod => mod.AdminModule) },
   { path: 'aboutus', loadChildren: () => import('./container/aboutus/aboutus.module').then(mod => mod.AboutusModule) },
