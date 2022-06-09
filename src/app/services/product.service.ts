@@ -5,17 +5,18 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ProductCategory } from '../common/product-category';
 import { ProductSubCategory } from '../common/product-subcategory';
+import { baseurl } from '../config/my-app-config';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ProductService {
 
-    private baseUrl = 'http://localhost:8080/api/products';
+    private baseUrl = `${baseurl}api/products`;
 
-    private categoryUrl = 'http://localhost:8080/api/product-category';
+    private categoryUrl = `${baseurl}api/product-category`;
 
-    private SubcategoryUrl = 'http://localhost:8080/api/product-subcategory';
+    private SubcategoryUrl = `${baseurl}api/product-subcategory`;
 
 
     constructor(private httpClient: HttpClient) {

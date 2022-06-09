@@ -28,7 +28,7 @@ export class UploadFileService {
   // getImage() {
   //   //Make a call to Sprinf Boot to get the Image Bytes.
   //   this.httpClient
-  //     .get('http://localhost:8080/image/get/' + this.imageName)
+  //     .get(`${baseurl}image/get/` + this.imageName)
   //     .subscribe((res) => {
   //       this.retrieveResonse = res;
   //       this.base64Data = this.retrieveResonse.picByte;
