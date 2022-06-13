@@ -17,5 +17,5 @@ export default {
     // }
 
 }
-// export const baseurl = 'http://localhost:8080/';
-export const baseurl = 'https://ttl-18h-r46eqtyxlq-uc.a.run.app/';
+export const baseurl = 'http://localhost:8080/';
+// export const baseurl = 'https://ttl-18h-r46eqtyxlq-uc.a.run.app/';
