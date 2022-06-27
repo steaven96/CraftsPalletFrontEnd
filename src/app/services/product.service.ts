@@ -76,9 +76,8 @@ export class ProductService {
 
     getAllProduct(): Observable<Product[]> {
 
-        return this.httpClient.get<GetResponseProducts>(this.baseUrl).pipe(
-            map(response => response._embedded.products)
-        );
+      console.log('this.baseUrl', baseurl);
+        return this.httpClient.get<any>(`${baseurl}api/products/getAllProducts`);
     }
 
     getProductCategories(): Observable<ProductCategory[]> {

@@ -13,20 +13,54 @@ export interface UserData {
 
 /** Constants used to fill up our data base. */
 const FRUITS: string[] = [
-  'blueberry', 'lychee', 'kiwi', 'mango', 'peach', 'lime', 'pomegranate', 'pineapple'
+  'blueberry',
+  'lychee',
+  'kiwi',
+  'mango',
+  'peach',
+  'lime',
+  'pomegranate',
+  'pineapple',
 ];
 const NAMES: string[] = [
-  'Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack', 'Charlotte', 'Theodore', 'Isla', 'Oliver',
-  'Isabella', 'Jasper', 'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'
+  'Maia',
+  'Asher',
+  'Olivia',
+  'Atticus',
+  'Amelia',
+  'Jack',
+  'Charlotte',
+  'Theodore',
+  'Isla',
+  'Oliver',
+  'Isabella',
+  'Jasper',
+  'Cora',
+  'Levi',
+  'Violet',
+  'Arthur',
+  'Mia',
+  'Thomas',
+  'Elizabeth',
 ];
 
 @Component({
   selector: 'app-admin-products',
   templateUrl: './admin-products.component.html',
-  styleUrls: ['./admin-products.component.scss']
+  styleUrls: ['./admin-products.component.scss'],
 })
 export class AdminProductsComponent {
-  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit'];
+  displayedColumns: string[] = [
+    'id',
+    'sku',
+    'name',
+    'status',
+    'description',
+    'mrp',
+    'bulkQuantity',
+    'bulkPrice',
+    'inventory'
+  ];
   dataSource: MatTableDataSource<UserData>;
   listingProduct: any;
 
@@ -41,9 +75,8 @@ export class AdminProductsComponent {
     this.dataSource = new MatTableDataSource(users);
   }
   ngOnInit() {
-		this.getProductList();
-		
-	}
+    this.getProductList();
+  }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -59,38 +92,27 @@ export class AdminProductsComponent {
     }
   }
   getProductList() {
-    this.productService.getAllProduct().subscribe(res => {
+    this.productService.getAllProduct().subscribe((res) => {
       //console.log('Product Sub Categories= in cart ' + JSON.stringify(res));
       this.listingProduct = JSON.stringify(res);
       this.listingProduct = JSON.parse(this.listingProduct);
       console.log('prodData', this.listingProduct);
-
-
-
-
     });
   }
-
-
 }
-
-
 
 /** Builds and returns a new User. */
 function createNewUser(id: number): UserData {
-  const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
+  const name =
+    NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
+    ' ' +
+    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
+    '.';
 
   return {
     id: id.toString(),
     name: name,
     progress: Math.round(Math.random() * 100).toString(),
-    fruit: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))]
+    fruit: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
   };
-
-
-
 }
-
-
-
