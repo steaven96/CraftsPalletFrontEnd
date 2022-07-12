@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from 'src/app/shared/auth.guard';
 import { AdminCategoriesFormComponent } from './admin-categories-form/admin-categories-form.component';
 import { AdminCustomerComponent } from './admin-customers/admin-customer.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { AdminLoginComponent } from './admin-login/admin.login.component';
 import { AdminProductFormComponent } from './admin-product-form/admin-product-form.component';
 import { AdminProductSubCategoriesComponent } from './admin-product-subcategories/admin-products-subcategories.component';
 import { AdminProductTemplateFormComponent } from './admin-product-template-form/admin-product-template-form.component';
@@ -15,7 +17,8 @@ import { AdminComponent } from './admin.component';
 const routes: Routes = [
 	{
 		path: '', component: AdminComponent, children: [
-			{ path: 'dashboard', component: AdminDashboardComponent },
+			{ path: 'login', component: AdminLoginComponent },
+			{ path: 'dashboard', component: AdminDashboardComponent, canActivate:[AuthGuard] },
 			{ path: 'products', component: AdminProductsComponent },
 			{ path: 'product-category', component: AdminProductCategoriesComponent },
 			{ path: 'customers', component: AdminCustomerComponent },

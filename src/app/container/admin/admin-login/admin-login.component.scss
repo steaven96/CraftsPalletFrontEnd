@@ -1,0 +1,125 @@
+#admin-login-container {
+
+
+  .login-container {
+    height    : 100vh;
+    background: #fbfbfb;
+
+    .login-box {
+      width        : 520px;
+      margin       : auto;
+      position     : fixed;
+      box-shadow   : 0px 0px 10px 3px #8888881c;
+      padding      : 40px;
+      background   : #fff;
+      top          : 15%;
+      border-radius: 5px;
+    }
+
+    .purezza-logo {
+      text-align: center;
+
+      img {
+        width        : 140px;
+        height       : 100%;
+        margin-bottom: 10px;
+      }
+    }
+
+    .description-text {
+      padding: 0 15px;
+    }
+
+    .login-form {
+      .form-label {
+        margin-bottom: 6px;
+      }
+
+      .email-sec,
+      .password-sec {
+        margin-bottom: 20px;
+
+        .d-flex {
+          display        : flex !important;
+          width          : 100%;
+          justify-content: space-between;
+        }
+      }
+
+      ::ng-deep .p-component {
+        width    : 100% !important;
+        // border: 1px solid #d5d5d5;
+      }
+
+      ::ng-deep ::placeholder {
+        font-size: 14px;
+        color    : #d5d5d5;
+      }
+
+      ::ng-deep.p-inputtext:focus {
+        outline       : 0 none;
+        outline-offset: 0;
+        box-shadow    : 0 0 3px 1px #00a59126;
+        border-color  : var(--admin-green);
+      }
+
+      ::ng-deep.p-inputtext:hover {
+        border-color: var(--admin-green);
+      }
+
+      .field-checkbox {
+        margin-bottom: 20px;
+
+        label {
+          margin-left: 5px;
+        }
+
+        ::ng-deep.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box:hover {
+          border-color: var(--admin-green);
+        }
+
+        ::ng-deep.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-focus {
+          box-shadow  : unset !important;
+          border-color: var(--admin-green);
+        }
+
+        ::ng-deep.p-checkbox .p-checkbox-box.p-highlight {
+          border-color: var(--admin-green);
+          background  : var(--admin-green);
+        }
+
+        .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
+          border-color: var(--admin-green);
+          background  : var(--admin-green);
+        }
+      }
+    }
+
+    p {
+      font-size: 14px;
+      color    : #202020;
+    }
+
+    .link-text:hover {
+      color : var(--admin-green);
+      cursor: pointer;
+    }
+
+    .invalid-feedback {
+      display   : block;
+      width     : 100%;
+      margin-top: 0.25rem;
+      font-size : .875em;
+      color     : #dc3545 !important;
+    }
+
+    @media (max-width: 575px) {
+      .login-box {
+        width  : 90%;
+        padding: 40px 20px;
+      }
+    }
+  }
+
+
+}

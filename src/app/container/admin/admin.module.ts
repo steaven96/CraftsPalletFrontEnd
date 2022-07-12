@@ -60,10 +60,11 @@ import { AdminProductSubCategoriesComponent } from './admin-product-subcategorie
 import { AdminSubCategoriesFormComponent } from './admin-subcategories-form/admin-subcategories-form.component';
 import { AdminProductTemplateComponent } from './admin-product-template/admin-product-template.component';
 import { AdminProductTemplateFormComponent } from './admin-product-template-form/admin-product-template-form.component';
+import { AdminLoginComponent } from './admin-login/admin.login.component';
 
 @NgModule({
     declarations: [
-        AdminComponent, AdminDashboardComponent, AdminProductsComponent, AdminCategoriesFormComponent,AdminSubCategoriesFormComponent,AdminProductSubCategoriesComponent,AdminProductCategoriesComponent, AdminCustomerComponent, AdminProductFormComponent, AdminProductTemplateComponent, AdminProductTemplateFormComponent
+        AdminComponent, AdminDashboardComponent, AdminProductsComponent, AdminCategoriesFormComponent,AdminSubCategoriesFormComponent,AdminProductSubCategoriesComponent,AdminProductCategoriesComponent, AdminCustomerComponent, AdminProductFormComponent, AdminProductTemplateComponent, AdminProductTemplateFormComponent, AdminLoginComponent
     ],
     imports: [
         CommonModule,

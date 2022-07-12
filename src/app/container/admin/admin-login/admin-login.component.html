@@ -1,0 +1,111 @@
+<div id="admin-login-container">
+  <div class="login-container">
+    <div class="row justify-content-center">
+      <div class="login-box">
+        <div class="purezza-logo mb-2">
+          <!-- <img src="../../../../assets/images/PUREZA_LOGO.svg" alt="" /> -->
+        </div>
+        <p class="description-text text-center">
+          Enter your email address and password to access admin panel.
+        </p>
+        <div class="login-form">
+          <form [formGroup]="loginForm">
+            <div class="email-sec">
+              <p class="form-label">Email Address</p>
+              <!-- <input
+                formControlName="EMAIL"
+                placeholder="Email Address"
+                type="text"
+                pInputText
+              /> -->
+              <input
+                matInput
+                #input
+                maxlength="100"
+                placeholder="Email Address"
+                formControlName="EMAIL"
+                required
+              />
+              <div
+                *ngIf="submitted && formValidationState.EMAIL.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formValidationState.EMAIL.errors.required">
+                  Email is required
+                </div>
+                <div *ngIf="formValidationState.EMAIL.errors.email">
+                  email must be valid
+                </div>
+              </div>
+            </div>
+            <div class="password-sec">
+              <div class="d-flex">
+                <p class="form-label">Password</p>
+              </div>
+              <!-- <p-password
+                [feedback]="false"
+                formControlName="PASSWORD"
+                placeholder="Password"
+                (keyup.enter)="submitLogin()"
+              ></p-password> -->
+
+              <input
+                matInput
+                #input
+                type="password"
+                placeholder="Password"
+                formControlName="PASSWORD"
+                required
+              />
+              <div
+                *ngIf="submitted && formValidationState.PASSWORD.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="formValidationState.PASSWORD.errors.required">
+                  Password is required
+                </div>
+                <div *ngIf="formValidationState.PASSWORD.errors.minLength">
+                  Password must have 4 values
+                </div>
+              </div>
+            </div>
+            <div class="field-checkbox">
+              <div class="d-flex justify-content-between">
+                <div>
+                  <!-- <p-checkbox
+                    name="remember"
+                    formControlName="REMEMBER"
+                    [binary]="true"
+                  ></p-checkbox>
+                  <label class="ml-2" for="ny">Remember Me</label> -->
+
+                  <mat-checkbox class="example-margin">
+                    Remember Me
+                  </mat-checkbox>
+                </div>
+                <p class="form-label link-text">
+                  <a [routerLink]="['/admin/forgotpassword']"
+                    >Forgot password?</a
+                  >
+                </p>
+              </div>
+            </div>
+            <div class="btn-sec">
+              <!-- <p-button
+                (click)="submitLogin()"
+                [disabled]="!loginForm.valid"
+                class="ng-primary-button"
+                label="Sign In"
+              >
+              </p-button> -->
+
+              <button mat-raised-button color="primary" (click)="submitLogin()">
+                Sign In
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
