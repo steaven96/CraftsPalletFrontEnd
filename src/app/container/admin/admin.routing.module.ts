@@ -23,6 +23,7 @@ const routes: Routes = [
 			{ path: 'product-category', component: AdminProductCategoriesComponent },
 			{ path: 'customers', component: AdminCustomerComponent },
 			{ path: 'products/add-product', component: AdminProductFormComponent },
+			{ path: 'products/edit-product/:id', component: AdminProductFormComponent },
 			{ path: 'product-category/add-categorires', component: AdminCategoriesFormComponent },
 			{ path: 'product-subcategory', component: AdminProductSubCategoriesComponent },
 			{ path: 'product-subcategory/add-subcategorires', component: AdminSubCategoriesFormComponent },

@@ -18,7 +18,7 @@ export class NavbarComponent {
 	}
 	ngOnInit() {
 		this.getCategoryList();
-		this.getSubCategoryList();
+		// this.getSubCategoryList();
 	}
 
 	getCategoryList() {
@@ -27,7 +27,7 @@ export class NavbarComponent {
 			this.listingcategory = JSON.stringify(res);
 			this.listingcategory = JSON.parse(this.listingcategory);
 			console.log('prodData in Categories', this.listingcategory);
-
+      this.getSubCategoryList();
 		});
 
 	}
@@ -44,18 +44,6 @@ export class NavbarComponent {
 
 		});
 	}
-
-	// GroupBYProductType(objectArray, property) {
-	//     return objectArray.reduce((acc, obj) => {
-	//         const key = obj[property];
-	//         if (!acc[key]) {
-	//             acc[key] = [];
-	//         }
-	//         // Add object to list for given key's value
-	//         acc[key].push(obj);
-	//         return acc;
-	//     }, {});
-	// }
 	createNestedList() {
 
 

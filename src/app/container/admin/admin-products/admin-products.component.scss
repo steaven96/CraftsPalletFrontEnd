@@ -1,18 +1,21 @@
 /* Structure */
 #admin-products-container {
-    padding: 25px 50px;
-    table {
-        width: 100%;
-      }
-      
-      .mat-form-field {
-        font-size: 14px;
-        width: 100%;
-      }
-      
-      td, th {
-        width: 25%;
-      }
-}
+  padding: 25px 50px;
 
-  
+  table {
+    width: 100%;
+  }
+
+  .mat-form-field {
+    font-size: 14px;
+    width    : 100%;
+  }
+
+  td,
+  th {
+    width: 25%;
+  }
+  .actions {
+    cursor: pointer;
+  }
+}

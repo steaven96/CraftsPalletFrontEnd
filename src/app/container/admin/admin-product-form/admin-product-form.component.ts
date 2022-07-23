@@ -12,6 +12,7 @@ import { ProductService } from 'src/app/services/product.service';
 import { Observable } from 'rxjs';
 import { UploadFileService } from 'src/app/services/upload-file.serive';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-product-form',
@@ -87,6 +88,8 @@ export class AdminProductFormComponent implements OnInit {
 
   productForm: FormGroup;
 
+  productData: any = {};
+
   //file upload
   selectedImgFiles: any;
   currentFile: any;
@@ -96,11 +99,19 @@ export class AdminProductFormComponent implements OnInit {
   selectedFileNames: string[] = [];
   //file upload end
 
+  imageData: any;
+  base64Data: any;
   constructor(
     private fb: FormBuilder,
     private productService: ProductService,
-    private uploadService: UploadFileService
+    private uploadService: UploadFileService,
+    private activatedRoute: ActivatedRoute, private router: Router
   ) {
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    console.log('id', id);
+    if (!!id) {
+      this.getProductById(id);
+    }
     this.initProductForm();
   }
 
@@ -108,6 +119,44 @@ export class AdminProductFormComponent implements OnInit {
     this.getProductTemplates();
     this.getCategoryList();
     this.getSubCategoryList();
+  }
+
+  getProductById(productId: any) {
+    console.log('called', productId);
+    const obj = {
+      id: productId,
+    };
+    console.log('obj ***** ', obj);
+    this.productService.fetchProductById(obj).subscribe(
+      (res) => {
+        console.log('getProductById', res);
+        this.productData = res;
+        if (!!this.productData.primaryImg) {
+          this.getImageById(this.productData.primaryImg);
+        }
+      },
+      (err) => {
+        alert('Error Fetching Product');
+      }
+    );
+  }
+
+  getImageById(imgId: any) {
+    const obj = {
+      id: imgId,
+    };
+    this.productService.fetchImageById(obj).subscribe(
+      (res) => {
+        console.log('logs** getImageById', res);
+        // this.productData = res;
+        // this.base64Data =
+        this.imageData = 'data:image/jpeg;base64,' + res.picBytes;
+        console.log('this.imageData', this.imageData);
+      },
+      (err) => {
+        alert('Error Fetching Product');
+      }
+    );
   }
 
   getCategoryList() {
@@ -140,33 +189,22 @@ export class AdminProductFormComponent implements OnInit {
   }
   onFileChanged(event: any): void {
     this.selectedImgFiles = event.target.files[0];
-    this.uploadImages();
+    // this.uploadImages();
   }
 
-  uploadImages() {
+  async uploadImages() {
     console.log('selcted files', this.selectedImgFiles);
-
+    let res: any = '';
     this.uploadService.upload(this.selectedImgFiles).subscribe(
-      (event) => {
-
+      (response) => {
+        res = response;
       },
-      (err) => {}
+      (err) => {
+        res = err;
+      }
     );
-    // this.uploadService.upload(this.currentFile).subscribe(
-    //   (event: any) => {
-    //     if (event.type === HttpEventType.UploadProgress) {
-    //       this.progress = Math.round(100 * event.loaded / event.total);
-    //     } else if (event instanceof HttpResponse) {
-    //       this.fileMessage = event.body.message;
-    //       this.fileInfos = this.uploadService.getFiles();
-    //     }
-    //   },
-    //   err => {
-    //     this.progress = 0;
-    //     this.fileMessage = 'Could not upload the file!';
-    //     this.currentFile = undefined;
-    //   });
-    // this.selectedImgFiles = undefined;
+
+    return res;
   }
   getSubCategoryList() {
     this.productService.getProductSubCategories().subscribe((res) => {
@@ -200,88 +238,30 @@ export class AdminProductFormComponent implements OnInit {
       tag6: new FormControl('', []),
     });
   }
-  // onSizeSelection() {
-  //   console.log(this.productForm.value);
-  //   const sizeval = this.productForm.value['hasSize'];
-  //   if (sizeval) {
-  //     this.productForm.controls['sizeOptions'].enable();
-  //   } else {
-  //     this.productForm.controls['sizeOptions'].setValue('');
-  //     this.productForm.controls['sizeOptions'].disable();
-  //   }
 
-  // }
-  // onColorSelection() {
-  //   console.log(this.productForm.value);
-  //   const sizeval = this.productForm.value['hasColor'];
-  //   if (sizeval) {
-  //     this.productForm.controls['colorOptions'].enable();
-  //   } else {
-  //     this.productForm.controls['colorOptions'].setValue('');
-  //     this.productForm.controls['colorOptions'].disable();
-  //   }
+  onProductSave() {
+    // this.uploadImages().then((res) => {
+    //   console.log('logs** onProductSave res', res);
+    //   this.productFormSubmit();
+    // }).catch((err) => {
+    //   console.log('logs** onProductSave err', err);
 
-  // }
+    // });
 
-  // addSize(event: MatChipInputEvent): void {
-  //   const value = (event.value || '').trim();
+    this.uploadService.upload(this.selectedImgFiles).subscribe(
+      (response: any) => {
+        console.log('response', response);
+        if (!!response['body']) {
+          this.productFormSubmit(response['body']['imgId']);
+        }
+      },
+      (err) => {
+        console.log('err', err);
+      }
+    );
+  }
 
-  //   // Add our fruit
-  //   if (value) {
-  //     const obj = { name: value };
-  //     this.fruits.push(obj);
-  //   }
-
-  //   // Clear the input value
-  //   event.chipInput!.clear();
-  // }
-
-  // addColor(event: MatChipInputEvent): void {
-  //   const value = (event.value || '').trim();
-
-  //   // Add our fruit
-  //   if (value) {
-  //     const obj = { name: value };
-  //     this.colors.push(obj);
-  //   }
-
-  //   // Clear the input value
-  //   event.chipInput!.clear();
-  // }
-
-  // removeSize(fruit: any): void {
-  //   const index = this.fruits.indexOf(fruit);
-
-  //   if (index >= 0) {
-  //     this.fruits.splice(index, 1);
-  //   }
-  // }
-
-  // removeColor(fruit: any): void {
-  //   const index = this.colors.indexOf(fruit);
-
-  //   if (index >= 0) {
-  //     this.colors.splice(index, 1);
-  //   }
-  // }
-
-  productFormSubmit() {
-    //     bulkPrice: "400"
-    // bulkQuantity: "100"
-    // dateDelivery: Sun Feb 27 2022 00:00:00 GMT+0530 (India Standard Time) {}
-    // inventory: "1000"
-    // price: "500"
-    // productCategory: 57
-    // productDescription: "test desc"
-    // productName: "test"
-    // productSubCategory: 5
-    // tag1: "XL"
-    // tag2: "Blue"
-    // tag3: ""
-    // tag4: ""
-    // tag5: ""
-    // tag6: ""
-    // templateId: 1
+  productFormSubmit(imgId: any) {
     console.log('on submit', this.productForm.value);
     const formData = this.productForm.value;
     const obj = {
@@ -300,13 +280,17 @@ export class AdminProductFormComponent implements OnInit {
       bulkPrice: parseInt(parseFloat(formData.bulkPrice).toFixed(2)),
       inventory: parseInt(formData.inventory),
       templateId: formData.templateId,
+      primaryImg: imgId,
     };
     console.log('obj ***** ', obj);
     this.productService.addProduct(obj).subscribe(
       (res) => {
         console.log('addProduct', res);
+        alert('Product saved');
+        this.router.navigate(['admin/products']);
       },
       (err) => {
+        alert('Error Saving Product');
         console.log('err', err);
       }
     );
