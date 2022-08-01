@@ -44,7 +44,7 @@ export class AdminProductFormComponent implements OnInit {
   ];
 
   progressInfos: any[] = [];
-  showTemplatefill = false;
+  showVariants = false;
 
   previews: string[] = [];
   imageInfos?: Observable<any>;
@@ -78,7 +78,7 @@ export class AdminProductFormComponent implements OnInit {
     ],
   };
   templateData: any = [];
-  templateSelected: any;
+  selectedTemplate: any;
   selectable = true;
   removable = true;
   addOnBlur = true;
@@ -101,24 +101,21 @@ export class AdminProductFormComponent implements OnInit {
 
   imageData: any;
   base64Data: any;
+
   constructor(
     private fb: FormBuilder,
     private productService: ProductService,
     private uploadService: UploadFileService,
-    private activatedRoute: ActivatedRoute, private router: Router
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
-    console.log('id', id);
-    if (!!id) {
-      this.getProductById(id);
-    }
     this.initProductForm();
   }
 
   ngOnInit() {
     this.getProductTemplates();
     this.getCategoryList();
-    this.getSubCategoryList();
+    // this.getSubCategoryList();
   }
 
   getProductById(productId: any) {
@@ -126,13 +123,33 @@ export class AdminProductFormComponent implements OnInit {
     const obj = {
       id: productId,
     };
-    console.log('obj ***** ', obj);
     this.productService.fetchProductById(obj).subscribe(
       (res) => {
         console.log('getProductById', res);
         this.productData = res;
+        if (!!this.productData.categoryId) {
+          const categoryObj = this.listingcategory.filter(
+            (x: any) => x.id == this.productData.categoryId
+          );
+          this.productForm.get('productCategory')?.setValue(categoryObj[0]);
+          this.filterSubCategories(this.productData.categoryId);
+        }
+        if (!!this.productData.subCategoryId) {
+          const subCatObj = this.filteredSubCategories.filter(
+            (x: any) => x.id == this.productData.subCategoryId
+          );
+          this.productForm.get('productSubCategory')?.setValue(subCatObj[0]);
+          this.filterSubCategories(this.productData.categoryId);
+        }
         if (!!this.productData.primaryImg) {
           this.getImageById(this.productData.primaryImg);
+        }
+        if (!!this.productData.templateId) {
+          const templateObj = this.templateData.filter(
+            (x: any) => x.id == this.productData.templateId
+          );
+          this.productForm.get('templateId')?.setValue(templateObj[0]);
+          this.onTemplateSelection({ value: this.productData.templateId });
         }
       },
       (err) => {
@@ -165,6 +182,7 @@ export class AdminProductFormComponent implements OnInit {
       this.listingcategory = JSON.stringify(res);
       this.listingcategory = JSON.parse(this.listingcategory);
       console.log('prodData in Categories', this.listingcategory);
+      this.getSubCategoryList();
     });
   }
 
@@ -180,10 +198,22 @@ export class AdminProductFormComponent implements OnInit {
     );
   }
   onCategorySelection(e: any) {
-    console.log('e', e);
-    console.log('this.listingSubcategory', this.listingSubcategory);
+    this.filterSubCategories(e.value);
+  }
+  // onCategorySelection(e: any) {
+  //   console.log('e', e);
+  //   console.log('this.listingSubcategory', this.listingSubcategory);
+  //   this.filteredSubCategories = this.listingSubcategory.filter(
+  //     (x: any) => x.categoryId == e.value
+  //   );
+  //   console.log('this.filteredSubCategories', this.filteredSubCategories);
+  // }
+
+  filterSubCategories(categoryId: any) {
+    console.log('logs** categoryId', categoryId);
+    console.log('logs** this.listingSubcategory', this.listingSubcategory);
     this.filteredSubCategories = this.listingSubcategory.filter(
-      (x: any) => x.categoryId == e.value
+      (x: any) => x.categoryId == categoryId
     );
     console.log('this.filteredSubCategories', this.filteredSubCategories);
   }
@@ -212,6 +242,11 @@ export class AdminProductFormComponent implements OnInit {
       this.listingSubcategory = JSON.stringify(res);
       this.listingSubcategory = JSON.parse(this.listingSubcategory);
       console.log('prodData in Sub Categories', this.listingSubcategory);
+      const id = this.activatedRoute.snapshot.paramMap.get('id');
+      console.log('id', id);
+      if (!!id) {
+        this.getProductById(id);
+      }
     });
   }
   initProductForm() {
@@ -240,14 +275,6 @@ export class AdminProductFormComponent implements OnInit {
   }
 
   onProductSave() {
-    // this.uploadImages().then((res) => {
-    //   console.log('logs** onProductSave res', res);
-    //   this.productFormSubmit();
-    // }).catch((err) => {
-    //   console.log('logs** onProductSave err', err);
-
-    // });
-
     this.uploadService.upload(this.selectedImgFiles).subscribe(
       (response: any) => {
         console.log('response', response);
@@ -267,8 +294,12 @@ export class AdminProductFormComponent implements OnInit {
     const obj = {
       name: formData.productName,
       description: formData.productDescription,
-      categoryId: formData.productCategory.toString(),
-      subCategoryId: formData.productSubCategory.toString(),
+      categoryId: !!formData.productCategory
+        ? formData.productCategory['id']
+        : null,
+      subCategoryId: !!formData.productSubCategory
+        ? formData.productSubCategory['id']
+        : null,
       tag1: formData.tag1,
       tag2: formData.tag2,
       tag3: formData.tag3,
@@ -279,7 +310,7 @@ export class AdminProductFormComponent implements OnInit {
       bulkQuantity: parseInt(formData.bulkQuantity),
       bulkPrice: parseInt(parseFloat(formData.bulkPrice).toFixed(2)),
       inventory: parseInt(formData.inventory),
-      templateId: formData.templateId,
+      templateId: !!formData.templateId ? formData.templateId['id']: null,
       primaryImg: imgId,
     };
     console.log('obj ***** ', obj);
@@ -296,12 +327,10 @@ export class AdminProductFormComponent implements OnInit {
     );
   }
   onTemplateSelection(e: any) {
-    console.log(e);
-
-    let index = this.templateData.findIndex((obj: any) => obj.id === e.value);
+    let index = this.templateData.findIndex((obj: any) => obj.id == e.value);
     if (index != -1) {
-      this.templateSelected = this.templateData[index];
-      this.showTemplatefill = true;
+      this.selectedTemplate = this.templateData[index];
+      this.showVariants = true;
     }
   }
 }

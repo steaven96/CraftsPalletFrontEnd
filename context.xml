@@ -1,0 +1,17 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->
+<!-- The contents of this file will be loaded for each web application -->
+<context>
+
+    <!-- Default set of monitored resources. If one of these changes, the    -->
+    <!-- web application will be reloaded.                                   -->
+    <watchedresource>WEB-INF/web.xml</watchedresource>
+    <watchedresource>WEB-INF/tomcat-web.xml</watchedresource>
+    <watchedresource>${catalina.base}/conf/web.xml</watchedresource>
+
+    <!-- Uncomment this to disable session persistence across Tomcat restarts -->
+    <!--
+    <Manager pathname="" />
+    -->
+
+    <valve classname="org.apache.catalina.valves.rewrite.RewriteValve">
+</valve></context>
