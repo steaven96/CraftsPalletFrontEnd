@@ -14,8 +14,9 @@ import { AdminLoginService } from 'src/app/services/admin-login-service';
   styleUrls: ['./admin-login.component.scss'],
 })
 export class AdminLoginComponent {
-  loginForm!: FormGroup;
+  loginForm: FormGroup;
   submitted: boolean = false;
+  global = { fieldErrorMsg: '' };
 
   constructor(
     public router: Router,
@@ -75,5 +76,23 @@ export class AdminLoginComponent {
         }
       );
     }
+  }
+
+  isFieldValid(field: string) {
+    console.log('loginForm', this.loginForm);
+    if (!!this.loginForm.controls[field].errors) {
+      const errorsObj: any = this.loginForm.controls[field].errors;
+      if (errorsObj.required) {
+        this.global.fieldErrorMsg = 'Field Mandatory.';
+      } else if (!!errorsObj.email) {
+        this.global.fieldErrorMsg = 'Valid email,  address requied.';
+      } else if (!!errorsObj.notEqual) {
+        this.global.fieldErrorMsg = 'Confirm password doest not match.';
+      }
+    }
+    // return (
+    //   !this.loginForm.get(field).valid && this.loginForm.get(field).touched
+    // );
+    return true;
   }
 }

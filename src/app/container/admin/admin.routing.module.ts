@@ -15,28 +15,74 @@ import { AdminSubCategoriesFormComponent } from './admin-subcategories-form/admi
 import { AdminComponent } from './admin.component';
 
 const routes: Routes = [
-	{
-		path: '', component: AdminComponent, children: [
-			{ path: 'login', component: AdminLoginComponent },
-			{ path: 'dashboard', component: AdminDashboardComponent, canActivate:[AuthGuard] },
-			{ path: 'products', component: AdminProductsComponent },
-			{ path: 'product-category', component: AdminProductCategoriesComponent },
-			{ path: 'customers', component: AdminCustomerComponent },
-			{ path: 'products/add-product', component: AdminProductFormComponent },
-			{ path: 'products/edit-product/:id', component: AdminProductFormComponent },
-			{ path: 'product-category/add-categorires', component: AdminCategoriesFormComponent },
-			{ path: 'product-subcategory', component: AdminProductSubCategoriesComponent },
-			{ path: 'product-subcategory/add-subcategorires', component: AdminSubCategoriesFormComponent },
-			{ path: 'product-templates', component: AdminProductTemplateComponent },
-			{ path: 'product-templates/add-product-templates', component: AdminProductTemplateFormComponent },
-		],
-	},
+  {
+    path: '',
+    component: AdminComponent,
+    children: [
+      { path: 'login', component: AdminLoginComponent },
+      {
+        path: 'dashboard',
+        component: AdminDashboardComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'products',
+        component: AdminProductsComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'product-category',
+        component: AdminProductCategoriesComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'customers',
+        component: AdminCustomerComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'products/add-product',
+        component: AdminProductFormComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'products/edit-product/:id',
+        component: AdminProductFormComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'product-category/add-categorires',
+        component: AdminCategoriesFormComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'product-subcategory',
+        component: AdminProductSubCategoriesComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'product-subcategory/add-subcategorires',
+        component: AdminSubCategoriesFormComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'product-templates',
+        component: AdminProductTemplateComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'product-templates/add-product-templates',
+        component: AdminProductTemplateFormComponent,
+        canActivate: [AuthGuard],
+      },
+    ],
+  },
 
-	// { path: 'dashboard', component: AdminDashboardComponent },
+  // { path: 'dashboard', component: AdminDashboardComponent },
 ];
 
 @NgModule({
-	imports: [RouterModule.forChild(routes)],
-	exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {}

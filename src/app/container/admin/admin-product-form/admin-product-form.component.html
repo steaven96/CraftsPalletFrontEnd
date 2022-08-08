@@ -113,7 +113,7 @@
               (selectionChange)="onTemplateSelection($event)"
               [(ngModel)]="productData.templateId"
             >
-              <mat-option *ngFor="let item of templateData" [value]="item">
+              <mat-option *ngFor="let item of templateData;" [value]="item">
                 {{ item.templateName }}
               </mat-option>
             </mat-select>

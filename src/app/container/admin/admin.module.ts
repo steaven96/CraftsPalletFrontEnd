@@ -61,6 +61,7 @@ import { AdminSubCategoriesFormComponent } from './admin-subcategories-form/admi
 import { AdminProductTemplateComponent } from './admin-product-template/admin-product-template.component';
 import { AdminProductTemplateFormComponent } from './admin-product-template-form/admin-product-template-form.component';
 import { AdminLoginComponent } from './admin-login/admin.login.component';
+import { DisplayErrorModule } from 'src/app/plugins/display-errors/display-errors.module';
 
 @NgModule({
     declarations: [
@@ -69,7 +70,7 @@ import { AdminLoginComponent } from './admin-login/admin.login.component';
     imports: [
         CommonModule,
         AdminRoutingModule, FeaturedProductModule, CarouselModule, CategoriesMonthModule, MatToolbarModule, MatSidenavModule,
-        MatListModule, MatIconModule,
+        MatListModule, MatIconModule, DisplayErrorModule,
         A11yModule,
         ClipboardModule,
         CdkStepperModule,
